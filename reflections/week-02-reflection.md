@@ -10,7 +10,7 @@
 <!-- Paste a link to your commits for this week. The easiest way: go to your repo on GitHub,
      click "commits", and copy the URL after filtering by your name or branch. -->
 
-**Link: https://github.com/dmarsh31/media-tracker-android/pull/4**
+******Link: https://github.com/dmarsh31/media-tracker-android/pull/4**
 
 ---
 
@@ -20,7 +20,7 @@
      Part 1 is the link — I will verify the review exists on GitHub.
      Part 2 is your written assessment — what you actually looked at and what you found. -->
 
-**Reviewed:** *Patrick McLucas*
+******Reviewed:** *Patrick McLucas*
 **Link to my review: https://github.com/pmclucas/media-tracker-android/pull/2**
 
 ### What I Looked At
