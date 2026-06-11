@@ -1,5 +1,6 @@
 package edu.metrostate.ics342.mediatracker.ui.auth
 
+import android.R
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -15,10 +16,15 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
@@ -53,9 +59,9 @@ fun LoginScreen(
     ) {
 
         val imageModifier = Modifier
-            .size(50.dp)
+            .size(75.dp)
             .background(MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(16.dp))
-            .padding(10.dp)
+            .padding(18.dp)
 
 
         Image(
@@ -65,8 +71,11 @@ fun LoginScreen(
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary)
         )
 
-        Text(stringResource(edu.metrostate.ics342.mediatracker.R.string.app_name), style = MaterialTheme.typography.headlineMedium,
-            color = MaterialTheme.colorScheme.primary)
+        Spacer(Modifier.height(15.dp))
+
+        Text(stringResource(edu.metrostate.ics342.mediatracker.R.string.app_name),
+            style = MaterialTheme.typography.headlineMedium,
+            fontWeight = FontWeight.Bold)
 
         Spacer(Modifier.height(8.dp))
 
@@ -89,7 +98,9 @@ fun LoginScreen(
             keyboardActions = KeyboardActions(
                 onNext = { focusManager.moveFocus(FocusDirection.Down) }
             ),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(8.dp)
+
         )
 
         Spacer(Modifier.height(12.dp))
@@ -107,7 +118,8 @@ fun LoginScreen(
             keyboardActions = KeyboardActions(
                 onDone = { focusManager.clearFocus(); viewModel.onLoginClick() }
             ),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(8.dp)
         )
 
         if (errorMsg != null) {
@@ -137,7 +149,29 @@ fun LoginScreen(
         Spacer(Modifier.height(16.dp))
 
         TextButton(onClick = onNavigateToRegister) {
-            Text(stringResource(edu.metrostate.ics342.mediatracker.R.string.register_prompt))
+            //this is scuffed but hey it looks right!
+            Text(
+                text = buildAnnotatedString {
+                    withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.onSurfaceVariant)) {
+                        append(stringResource(edu.metrostate.ics342.mediatracker.R.string.register_prompt))
+                    }
+                    withStyle(style = SpanStyle()) {
+                        append(" ")
+                    }
+                    withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary)) {
+                        append(stringResource(edu.metrostate.ics342.mediatracker.R.string.register_prompt_clickable))
+                    }
+                }
+            )
         }
     }
+}
+
+@Preview
+@Composable
+fun LoginScreenPreview() {
+    LoginScreen(
+        onLoginSuccess = {},
+        onNavigateToRegister = {}
+    )
 }

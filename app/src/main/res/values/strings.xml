@@ -6,8 +6,19 @@
     <string name="email_label">Email</string>
     <string name="password_label">Password</string>
     <string name="sign_in_button">Sign In</string>
-    <string name="register_prompt">Don\'t have an account? Register</string>
-    <string name="register_not_implemented">Create Account is not implemented yet.</string>
+    <string name="register_prompt">Don\'t have an account?</string>
+    <string name="register_prompt_clickable">Sing Up</string>
+
+
+    <!-- Auth RegScreen -->
+    <string name="create_account">Create Account</string>
+    <string name="create_account_tagline">Join the community</string>
+    <string name="register_display_name">Display Name</string>
+    <string name="register_username">Username</string>
+    <string name="register_email">Email</string>
+    <string name="register_password">Password</string>
+    <string name="register_confirm_password">Confirm Password</string>
+
 
     <!-- Navigation -->
     <string name="nav_feed">Feed</string>
