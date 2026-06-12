@@ -1,10 +1,12 @@
 package edu.metrostate.ics342.mediatracker.navigation
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -60,12 +62,29 @@ fun MediaTrackerNavGraph(navController: NavHostController) {
                 )
             }
 
+            /*
             composable(Routes.REGISTER) {
                 RegisterScreen(
                     onRegisterSuccess = {
                         navController.navigate(Routes.ACTIVITY_FEED) {
                             popUpTo(Routes.LOGIN) { inclusive = true }
                         }
+                    },
+                    onNavigateToLogin = { navController.popBackStack() }
+                )
+            }
+            */
+
+            composable(Routes.REGISTER) {
+                val context = LocalContext.current
+
+                RegisterScreen(
+                    onRegisterSuccess = {
+                        Toast.makeText(
+                            context,
+                            "Registration not implemented yet",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     },
                     onNavigateToLogin = { navController.popBackStack() }
                 )

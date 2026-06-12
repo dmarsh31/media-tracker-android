@@ -9,11 +9,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -21,11 +23,15 @@ import androidx.compose.material3.OutlinedSecureTextField
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.SecureTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
@@ -34,11 +40,14 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -49,20 +58,44 @@ fun RegisterScreen(
     onNavigateToLogin: () -> Unit,
     viewModel: RegisterViewModel = viewModel()
 ) {
-    val displayName    by viewModel.displayName.collectAsState()
-    val username    by viewModel.username.collectAsState()
-    val email       by viewModel.email.collectAsState()
-    val password    by viewModel.password.collectAsState()
-    val confirmPassword    by viewModel.confirmPassword.collectAsState()
-    val passwordState = rememberTextFieldState()
-    val confirmPasswordState = rememberTextFieldState()
+    var displayName     by remember { mutableStateOf("") }
+    var username        by remember { mutableStateOf("") }
+    var email           by remember { mutableStateOf("") }
+    var password        by remember { mutableStateOf("") }
+    var confirmPassword by remember { mutableStateOf("") }
+    var errorMessage    by remember { mutableStateOf<String?>(null) }
+    val scrollState = rememberScrollState()
 
     val focusManager = LocalFocusManager.current
+
+    fun attemptRegister() {
+        println(
+            """
+        Display Name: $displayName
+        Username: $username
+        Email: $email
+        Password: $password
+        Confirm Password: $confirmPassword
+        """.trimIndent()
+        )
+        focusManager.clearFocus()
+        when {
+            displayName.isBlank() || email.isBlank() || username.isBlank() ||
+                    password.isBlank()    || confirmPassword.isBlank() -> {
+                errorMessage = "Please fill in all fields."
+            }
+            password != confirmPassword -> {
+                errorMessage = "Passwords do not match."
+            }
+            else -> onRegisterSuccess()
+        }
+    }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 24.dp),
+            .padding(horizontal = 24.dp)
+            .verticalScroll(scrollState),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -104,12 +137,15 @@ fun RegisterScreen(
         ////first input text Display name
         OutlinedTextField(
             value = displayName,
-            onValueChange = viewModel::onDisplayNameChange,
+            onValueChange = { displayName = it; errorMessage = null },
             label = { Text(stringResource(edu.metrostate.ics342.mediatracker.R.string.register_display_name)) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Text,
                 imeAction = ImeAction.Next
+            ),
+            keyboardActions = KeyboardActions(
+                onNext = { focusManager.moveFocus(FocusDirection.Down) }
             ),
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(8.dp),
@@ -119,12 +155,15 @@ fun RegisterScreen(
 
         OutlinedTextField(
             value         = username,
-            onValueChange = viewModel::onUsernameChange,
+            onValueChange = { username = it; errorMessage = null },
             label         = { Text(stringResource(edu.metrostate.ics342.mediatracker.R.string.register_username)) },
             singleLine    = true,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Text,
                 imeAction    = ImeAction.Next
+            ),
+            keyboardActions = KeyboardActions(
+                onNext = { focusManager.moveFocus(FocusDirection.Down) }
             ),
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(8.dp),
@@ -134,12 +173,15 @@ fun RegisterScreen(
 
         OutlinedTextField(
             value         = email,
-            onValueChange = viewModel::onEmailChange,
+            onValueChange = { email = it; errorMessage = null },
             label         = { Text(stringResource(edu.metrostate.ics342.mediatracker.R.string.register_email)) },
             singleLine    = true,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Email,
                 imeAction    = ImeAction.Next
+            ),
+            keyboardActions = KeyboardActions(
+                onNext = { focusManager.moveFocus(FocusDirection.Down) }
             ),
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(8.dp),
@@ -147,19 +189,39 @@ fun RegisterScreen(
 
         Spacer(Modifier.height(12.dp))
 
-        OutlinedSecureTextField(
-            state = passwordState,
+        OutlinedTextField(
+            value         = password,
+            onValueChange = { password = it; errorMessage = null },
+            label         = { Text(stringResource(edu.metrostate.ics342.mediatracker.R.string.register_password)) },
+            singleLine    = true,
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Password,
+                imeAction    = ImeAction.Next
+            ),
+            keyboardActions = KeyboardActions(
+                onNext = { focusManager.moveFocus(FocusDirection.Down) }
+            ),
+            visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth(),
-            placeholder = {Text("Password")},
             shape = RoundedCornerShape(8.dp),
         )
 
         Spacer(Modifier.height(12.dp))
 
-        OutlinedSecureTextField(
-            state = confirmPasswordState,
+        OutlinedTextField(
+            value         = confirmPassword,
+            onValueChange = { confirmPassword = it; errorMessage = null },
+            label         = { Text(stringResource(edu.metrostate.ics342.mediatracker.R.string.register_confirm_password)) },
+            singleLine    = true,
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Password,
+                imeAction    = ImeAction.Next
+            ),
+            keyboardActions = KeyboardActions(
+                onNext = { attemptRegister()}
+            ),
+            visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth(),
-            placeholder = {Text("Confirm Password")},
             shape = RoundedCornerShape(8.dp),
         )
 
@@ -168,12 +230,29 @@ fun RegisterScreen(
         Button(
             onClick  = {
                 focusManager.clearFocus()
-                viewModel.onRegisterClick(
-                )},
+                attemptRegister()
+                },
             enabled  = true,
             modifier = Modifier.fillMaxWidth().height(48.dp)
         )
         { Text(stringResource(edu.metrostate.ics342.mediatracker.R.string.register_prompt_clickable))
+        }
+
+        TextButton(onClick = onNavigateToLogin) {
+            //this is scuffed but hey it looks right!
+            Text(
+                text = buildAnnotatedString {
+                    withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.onSurfaceVariant)) {
+                        append(stringResource(edu.metrostate.ics342.mediatracker.R.string.login_prompt))
+                    }
+                    withStyle(style = SpanStyle()) {
+                        append(" ")
+                    }
+                    withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary)) {
+                        append(stringResource(edu.metrostate.ics342.mediatracker.R.string.login_prompt_clickable))
+                    }
+                }
+            )
         }
     }
 }

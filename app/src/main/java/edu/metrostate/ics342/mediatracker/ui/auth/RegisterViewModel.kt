@@ -1,5 +1,9 @@
 package edu.metrostate.ics342.mediatracker.ui.auth
 
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import edu.metrostate.ics342.mediatracker.data.UserRepository
@@ -11,7 +15,7 @@ import kotlinx.coroutines.launch
 
 class RegisterViewModel : ViewModel() {
     // ── Login ─────────────────────────────────────────────────────────────
-
+    //var displayNamee    by remember { mutableStateOf("") }
     private val _displayName    = MutableStateFlow("")
     val displayName: StateFlow<String> = _displayName.asStateFlow()
     private val _username    = MutableStateFlow("")
