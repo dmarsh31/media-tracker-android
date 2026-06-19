@@ -12,10 +12,21 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import edu.metrostate.ics342.mediatracker.data.network.DefaultUserRepository
 
-class RegisterViewModel : ViewModel() {
+
+class RegisterViewModel(
+    private val userRepository: UserRepository = DefaultUserRepository()
+) : ViewModel() {
+
+    sealed class RegisterUiState {
+        data object Idle    : RegisterUiState()
+        data object Loading : RegisterUiState()
+        data object Success : RegisterUiState()
+        data class Error(val msgResId: Int) : RegisterUiState()
+    }
+
     // ── Login ─────────────────────────────────────────────────────────────
-    //var displayNamee    by remember { mutableStateOf("") }
     private val _displayName    = MutableStateFlow("")
     val displayName: StateFlow<String> = _displayName.asStateFlow()
     private val _username    = MutableStateFlow("")
