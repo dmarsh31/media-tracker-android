@@ -6,14 +6,13 @@ import androidx.lifecycle.viewModelScope
 import edu.metrostate.ics342.mediatracker.data.model.TokenRequest
 import edu.metrostate.ics342.mediatracker.data.network.ApiConstants
 import edu.metrostate.ics342.mediatracker.data.network.RetrofitInstance
-import edu.metrostate.ics342.mediatracker.data.network.UserApiService
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class AuthViewModel() : ViewModel() {
+class AuthViewModel : ViewModel() {
     private val authApi = RetrofitInstance.userApiService
 
     sealed class AuthUiState {
@@ -50,13 +49,13 @@ class AuthViewModel() : ViewModel() {
                         clientSecret = ApiConstants.CLIENT_SECRET
                     )
                 )
-                Log.d("API_RESPONSE", "${response}")
+                Log.d("API_RESPONSE", "$response")
 
                 // response.accessToken should be here
                 _loginState.value = AuthUiState.Success
 
             } catch (e: Exception) {
-                Log.d("API_RESPONSE", "${e}")
+                Log.d("API_RESPONSE", "$e")
                 _loginState.value = AuthUiState.Error(
                     -1
                 )
