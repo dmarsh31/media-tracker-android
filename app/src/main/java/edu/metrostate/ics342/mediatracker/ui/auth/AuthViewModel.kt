@@ -3,6 +3,7 @@ package edu.metrostate.ics342.mediatracker.ui.auth
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import edu.metrostate.ics342.mediatracker.data.Session
 import edu.metrostate.ics342.mediatracker.data.model.TokenRequest
 import edu.metrostate.ics342.mediatracker.data.network.ApiConstants
 import edu.metrostate.ics342.mediatracker.data.network.RetrofitInstance
@@ -42,7 +43,7 @@ class AuthViewModel : ViewModel() {
             try {
                 val response = authApi.login(
                     TokenRequest(
-                        grantType = password.value,
+                        grantType = "password",
                         email = email.value,
                         password = password.value,
                         clientId = ApiConstants.CLIENT_ID,
@@ -53,6 +54,8 @@ class AuthViewModel : ViewModel() {
 
                 // response.accessToken should be here
                 _loginState.value = AuthUiState.Success
+                Session.accessToken = response.accessToken
+                Session.refreshToken = response.refreshToken
 
             } catch (e: Exception) {
                 Log.d("API_RESPONSE", "$e")

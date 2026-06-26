@@ -33,6 +33,12 @@
     <!-- Activity Feed -->
     <string name="feed_title">Feed</string>
 
+    <!-- Search -->
+    <string name="search_title">Search</string>
+    <string name="searchbar_placeholder">Search books, movies, shows…</string>
+
+
+
     <!-- Library -->
     <string name="library_title">Library</string>
     <string name="filter_all">All</string>
@@ -102,5 +108,11 @@
     <string name="media_unknown_author">Unknown Author</string>
     <string name="media_unknown_director">Unknown Director</string>
     <string name="media_unknown_creator">Unknown Creator</string>
+    <string name="error_empty_fields">You have empty feilds</string>
+    <string name="error_passwords_mismatch">Passswords dont match</string>
+    <string name="error_email_or_username_taken">email or username already taken</string>
+    <string name="error_network">Network error</string>
+    <string name="error_generic">error</string>
+    <string name="register_title">Create Account</string>
 
 </resources>
