@@ -14,8 +14,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import edu.metrostate.ics342.mediatracker.R
 import edu.metrostate.ics342.mediatracker.data.model.Media
@@ -70,7 +73,7 @@ fun MediaResultCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
     ) {
         Row(
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier.padding(18.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             val containerColor = when (media.mediaType) {
@@ -86,7 +89,8 @@ fun MediaResultCard(
 
             Box(
                 modifier = Modifier
-                    .size(72.dp)
+                    .width(68.dp)
+                    .height(100.dp)
                     .clip(RoundedCornerShape(8.dp))
                     .background(containerColor),
                 contentAlignment = Alignment.Center
@@ -105,7 +109,9 @@ fun MediaResultCard(
 
             Spacer(Modifier.width(12.dp))
 
-            Column(modifier = Modifier.weight(1f)) {
+            Column(modifier = Modifier
+                .weight(1f)
+                .align(Alignment.Top)) {
                 Text(
                     text = media.title,
                     style = MaterialTheme.typography.titleSmall,
@@ -113,7 +119,7 @@ fun MediaResultCard(
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
-                Spacer(Modifier.height(2.dp))
+                Spacer(Modifier.height(8.dp))
                 Text(
                     text = media.creatorCredit(LocalContext.current),
                     style = MaterialTheme.typography.bodySmall,
@@ -121,15 +127,27 @@ fun MediaResultCard(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
-                Spacer(Modifier.height(4.dp))
+                Spacer(Modifier.height(8.dp))
                 Text(
-                    text = buildString {
-                        append("★ ${"%.1f".format(media.averageRating)}")
+                    text = buildAnnotatedString {
+                        withStyle(
+                            style = SpanStyle(
+                                color = MaterialTheme.colorScheme.tertiary,
+                                //I would have used its own style, but it just looked like the star part was bolded
+                                fontWeight = FontWeight.Bold
+                                )
+                            ) {
+                            append("★ ${"%.1f".format(media.averageRating)}")
+                        }
+
                         append(" · ${media.mediaType.replaceFirstChar { it.uppercase() }}")
-                        media.publishedYear?.let { append(" · $it") }
+
+                        media.publishedYear?.let {
+                            append(" · $it")
+                        }
                     },
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.tertiary
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
         }
