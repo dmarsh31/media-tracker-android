@@ -29,17 +29,18 @@ val SurfaceVariant  = Color(0xFFE8E8F0)
 val OnSurfaceVariant= Color(0xFF44475A)
 val Outline         = Color(0xFF9CA3AF)
 
-// Movie type accent — rose/pink (no pink in the M3 palette above, so defined separately)
+//Moved all to separate val, so other changes won't affect these
+// Movie accent
 val MovieContainer   = Color(0xFFFFE4EE)
 val OnMovieContainer = Color(0xFF9D174D)
 
 // Book accent
-val BookContainer   = Color(0xFFFFE4EE)
-val OnBookContainer = Color(0xFF9D174D)
+val BookContainer   = Color(0xFFE0E0FF)
+val OnBookContainer = Color(0xFF3730A3)
 
 // Tv accent
-val TvContainer   = Color(0xFFFFE4EE)
-val OnTvContainer = Color(0xFF9D174D)
+val TvContainer   = Color(0xFFFEF3C7)
+val OnTvContainer = Color(0xFFD97706)
 
 // Dark theme
 val DarkBackground       = Color(0xFF0F0F1A)

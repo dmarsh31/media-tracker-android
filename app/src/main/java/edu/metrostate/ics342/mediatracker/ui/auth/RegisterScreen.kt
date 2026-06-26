@@ -106,7 +106,8 @@ fun RegisterScreen(
             keyboardActions = KeyboardActions(
                 onNext = { focusManager.moveFocus(FocusDirection.Down) }
             ),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(8.dp),
         )
 
         Spacer(Modifier.height(12.dp))
@@ -123,7 +124,9 @@ fun RegisterScreen(
             keyboardActions = KeyboardActions(
                 onNext = { focusManager.moveFocus(FocusDirection.Down) }
             ),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(8.dp),
+
         )
 
         Spacer(Modifier.height(12.dp))
@@ -140,7 +143,9 @@ fun RegisterScreen(
             keyboardActions = KeyboardActions(
                 onNext = { focusManager.moveFocus(FocusDirection.Down) }
             ),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(8.dp),
+
         )
 
 
@@ -160,7 +165,9 @@ fun RegisterScreen(
             keyboardActions = KeyboardActions(
                 onNext = { focusManager.moveFocus(FocusDirection.Down) }
             ),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(8.dp),
+
         )
 
         Spacer(Modifier.height(12.dp))
@@ -178,7 +185,9 @@ fun RegisterScreen(
             keyboardActions = KeyboardActions(
                 onDone = { focusManager.clearFocus(); viewModel.onRegisterClick() }
             ),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(8.dp),
+
         )
 
         if (errorMsg != null) {
@@ -197,7 +206,8 @@ fun RegisterScreen(
             enabled  = !isLoading,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(48.dp)
+                .height(48.dp),
+            shape = RoundedCornerShape(20.dp)
         ) {
             if (isLoading) {
                 CircularProgressIndicator(

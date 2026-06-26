@@ -111,7 +111,8 @@ fun LoginScreen(
                 keyboardActions = KeyboardActions(
                     onNext = { focusManager.moveFocus(FocusDirection.Down) }
                 ),
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(8.dp),
             )
 
             Spacer(Modifier.height(12.dp))
@@ -129,7 +130,9 @@ fun LoginScreen(
                 keyboardActions = KeyboardActions(
                     onDone = { focusManager.clearFocus(); viewModel.onLoginClick() }
                 ),
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(8.dp),
+
             )
 
             if (errorMsg != null) {
@@ -148,7 +151,8 @@ fun LoginScreen(
                 enabled  = !isLoading,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(48.dp)
+                    .height(48.dp),
+                shape = RoundedCornerShape(20.dp)
             ) {
                 if (isLoading) {
                     CircularProgressIndicator(

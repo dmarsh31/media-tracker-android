@@ -20,8 +20,12 @@ import androidx.compose.ui.unit.dp
 import edu.metrostate.ics342.mediatracker.R
 import edu.metrostate.ics342.mediatracker.data.model.Media
 import edu.metrostate.ics342.mediatracker.data.model.creatorCredit
+import edu.metrostate.ics342.mediatracker.theme.BookContainer
 import edu.metrostate.ics342.mediatracker.theme.MovieContainer
+import edu.metrostate.ics342.mediatracker.theme.OnBookContainer
 import edu.metrostate.ics342.mediatracker.theme.OnMovieContainer
+import edu.metrostate.ics342.mediatracker.theme.OnTvContainer
+import edu.metrostate.ics342.mediatracker.theme.TvContainer
 
 @Composable
 fun MediaTypeFilterChips(
@@ -70,14 +74,14 @@ fun MediaResultCard(
             verticalAlignment = Alignment.CenterVertically
         ) {
             val containerColor = when (media.mediaType) {
-                "book"  -> MaterialTheme.colorScheme.primaryContainer
+                "book"  -> BookContainer
                 "movie" -> MovieContainer
-                else    -> MaterialTheme.colorScheme.secondaryContainer
+                else    -> TvContainer
             }
             val iconTint = when (media.mediaType) {
-                "book"  -> MaterialTheme.colorScheme.onPrimaryContainer
+                "book"  -> OnBookContainer
                 "movie" -> OnMovieContainer
-                else    -> MaterialTheme.colorScheme.secondary
+                else    -> OnTvContainer
             }
 
             Box(
@@ -125,7 +129,7 @@ fun MediaResultCard(
                         media.publishedYear?.let { append(" · $it") }
                     },
                     style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.secondary
+                    color = MaterialTheme.colorScheme.tertiary
                 )
             }
         }
