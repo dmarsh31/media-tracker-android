@@ -56,8 +56,8 @@ fun RegisterScreen(
             .fillMaxSize()
             .padding(horizontal = 24.dp)
             .verticalScroll(scrollState),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        verticalArrangement   = Arrangement.Center,
+        horizontalAlignment   = Alignment.CenterHorizontally
     ) {
         Icon(
             imageVector        = Icons.Filled.SmartDisplay,
@@ -86,10 +86,10 @@ fun RegisterScreen(
         Spacer(Modifier.height(40.dp))
 
         OutlinedTextField(
-            value         = displayName,
-            onValueChange = viewModel::onDisplayNameChange,
-            label         = { Text(stringResource(R.string.register_display_name)) },
-            singleLine    = true,
+            value           = displayName,
+            onValueChange   = viewModel::onDisplayNameChange,
+            label           = { Text(stringResource(R.string.register_username)) },
+            singleLine      = true,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Text,
                 imeAction    = ImeAction.Next
@@ -103,10 +103,10 @@ fun RegisterScreen(
         Spacer(Modifier.height(12.dp))
 
         OutlinedTextField(
-            value         = email,
-            onValueChange = viewModel::onEmailChange,
-            label         = { Text(stringResource(R.string.email_label)) },
-            singleLine    = true,
+            value           = email,
+            onValueChange   = viewModel::onEmailChange,
+            label           = { Text(stringResource(R.string.email_label)) },
+            singleLine      = true,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Email,
                 imeAction    = ImeAction.Next
@@ -120,10 +120,10 @@ fun RegisterScreen(
         Spacer(Modifier.height(12.dp))
 
         OutlinedTextField(
-            value         = username,
-            onValueChange = viewModel::onUsernameChange,
-            label         = { Text(stringResource(R.string.register_username)) },
-            singleLine    = true,
+            value           = username,
+            onValueChange   = viewModel::onUsernameChange,
+            label           = { Text(stringResource(R.string.register_username)) },
+            singleLine      = true,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Text,
                 imeAction    = ImeAction.Next
@@ -195,7 +195,7 @@ fun RegisterScreen(
                     color       = MaterialTheme.colorScheme.onPrimary
                 )
             } else {
-                Text(stringResource(R.string.sign_in_button))
+                Text(stringResource(R.string.sign_up_button))
             }
         }
 

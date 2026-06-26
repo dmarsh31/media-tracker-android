@@ -1,29 +1,33 @@
 package edu.metrostate.ics342.mediatracker.ui.auth
 
+import android.app.Application
 import android.util.Log
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import edu.metrostate.ics342.mediatracker.data.Session
-import edu.metrostate.ics342.mediatracker.data.model.TokenRequest
-import edu.metrostate.ics342.mediatracker.data.network.ApiConstants
-import edu.metrostate.ics342.mediatracker.data.network.RetrofitInstance
-import kotlinx.coroutines.delay
+import edu.metrostate.ics342.mediatracker.R
+import edu.metrostate.ics342.mediatracker.data.LoginResult
+import edu.metrostate.ics342.mediatracker.data.SessionRepository
+import edu.metrostate.ics342.mediatracker.data.UserRepository
+import edu.metrostate.ics342.mediatracker.data.datastore.DefaultSessionRepository
+import edu.metrostate.ics342.mediatracker.data.network.DefaultUserRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlin.math.log
 
-class AuthViewModel : ViewModel() {
-    private val authApi = RetrofitInstance.userApiService
+class AuthViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val userRepository: UserRepository = DefaultUserRepository()
+    private val sessionRepository: SessionRepository = DefaultSessionRepository(application)
 
     sealed class AuthUiState {
-        object Idle    : AuthUiState()
-        object Loading : AuthUiState()
-        object Success : AuthUiState()
+        data object Idle    : AuthUiState()
+        data object Loading : AuthUiState()
+        data object Success : AuthUiState()
         data class Error(val msgResId: Int) : AuthUiState()
     }
 
-    // ── Login ─────────────────────────────────────────────────────────────
     private val _email    = MutableStateFlow("")
     val email: StateFlow<String> = _email.asStateFlow()
 
@@ -39,41 +43,32 @@ class AuthViewModel : ViewModel() {
     fun onLoginClick() {
         viewModelScope.launch {
             _loginState.value = AuthUiState.Loading
-            delay(800)
-            try {
-                val response = authApi.login(
-                    TokenRequest(
-                        grantType = "password",
-                        email = email.value,
-                        password = password.value,
-                        clientId = ApiConstants.CLIENT_ID,
-                        clientSecret = ApiConstants.CLIENT_SECRET
-                    )
-                )
-                Log.d("API_RESPONSE", "$response")
 
-                // response.accessToken should be here
-                _loginState.value = AuthUiState.Success
-                Session.accessToken = response.accessToken
-                Session.refreshToken = response.refreshToken
-
-            } catch (e: Exception) {
-                Log.d("API_RESPONSE", "$e")
-                _loginState.value = AuthUiState.Error(
-                    -1
-                )
+            if (_email.value.isBlank() || _password.value.isBlank()) {
+                _loginState.value = AuthUiState.Error(R.string.error_empty_credentials)
+                return@launch
             }
 
+            val result = userRepository.login(
+                email    = _email.value,
+                password = _password.value
+            )
 
-            if (_email.value.isNotBlank() && _password.value.isNotBlank()) {
-
-                _loginState.value = AuthUiState.Success
-            } else {
-                _loginState.value = AuthUiState.Error(edu.metrostate.ics342.mediatracker.R.string.error_empty_credentials)
+            when (result) {
+                is LoginResult.Success -> {
+                    sessionRepository.saveSession(
+                        accessToken  = result.accessToken,
+                        refreshToken = result.refreshToken,
+                        user         = result.user
+                    )
+                    _loginState.value = AuthUiState.Success
+                }
+                LoginResult.InvalidCredentials -> _loginState.value = AuthUiState.Error(R.string.error_invalid_credentials)
+                LoginResult.NetworkError       -> _loginState.value = AuthUiState.Error(R.string.error_network)
+                LoginResult.UnknownError       -> _loginState.value = AuthUiState.Error(R.string.error_generic)
             }
         }
     }
 
     fun resetLoginState() { _loginState.value = AuthUiState.Idle }
-
 }

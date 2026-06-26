@@ -1,6 +1,5 @@
 package edu.metrostate.ics342.mediatracker.ui.auth
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import edu.metrostate.ics342.mediatracker.R
@@ -76,8 +75,6 @@ class RegisterViewModel(
                 username    = _username.value,
                 displayName = _displayName.value
             )
-
-            Log.d("REGISTER", "Result: $result")
 
             _registerState.value = when (result) {
                 RegisterResult.Success      -> RegisterUiState.Success
