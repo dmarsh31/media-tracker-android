@@ -24,7 +24,8 @@
 **Link to my review: https://github.com/fucheeyoung-blip/media-tracker-android/pull/6/changes/0cb6bf8fdaffb6442500786fd796f28ce034ecd3#diff-697f70cdd88ba88fe77eebda60c7e143f6ad1286bca75017421e93ad84fb87df**
 
 ### What I Looked At
-    Mostly the new network folder with the api logic
+    Mostly the new network folder with the api logic, and how it connects to the view model of the login
+    and register
 
 <!-- Walk through the code you reviewed. What was the PR trying to do? Which files or
      functions did you focus on? -->
@@ -37,7 +38,7 @@
 
 ### Comments I Left
     Overall looks inline with professors code
-    
+
 <!-- Briefly summarize the comments you left on the PR. If you left a positive comment,
      say what it was. If you left a suggestion, say what you suggested and why. -->
 
@@ -45,6 +46,7 @@
 
 ## One Thing I Understood More Deeply
     Im starting to put togather how the api calls and responses work by catching the response with a object
+    im also starting see how to pass values from the viewmodel to the screen for feilds like the passwords and ect.
 <!-- Be specific. Don't write "I learned about ViewModels." Write what specifically clicked —
      what was confusing before, what made it make sense, and how you'd explain it to someone else.
      There are no wrong answers here. -->
