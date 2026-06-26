@@ -1,4 +1,5 @@
 package edu.metrostate.ics342.mediatracker.data.network
+
 import edu.metrostate.ics342.mediatracker.BuildConfig
 
 object ApiConstants {
