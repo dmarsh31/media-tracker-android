@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import edu.metrostate.ics342.mediatracker.R
 import edu.metrostate.ics342.mediatracker.theme.MediaTrackerTheme
+import edu.metrostate.ics342.mediatracker.theme.WantTo
 
 @Composable
 fun LoginScreen(
@@ -53,6 +54,11 @@ fun LoginScreen(
         }
     }
 
+    LaunchedEffect(Unit) {
+        viewModel.onEmailChange("dcmarsh@gmail.com")
+        viewModel.onPasswordChange("1234")
+    }
+
     val isLoading = loginState is AuthViewModel.AuthUiState.Loading
     val errorMsg  = (loginState as? AuthViewModel.AuthUiState.Error)?.msgResId?.let { stringResource(it) }
 
@@ -65,22 +71,21 @@ fun LoginScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            val imageModifier = Modifier
-                .size(75.dp)
-                .background(MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(16.dp))
-                .padding(18.dp)
-
-
             Image(
                 painter = painterResource(id = edu.metrostate.ics342.mediatracker.R.drawable.logo),
                 contentDescription = "Login Screen Logo",
-                modifier = imageModifier,
-                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary)
+                modifier = Modifier
+                    .size(75.dp)
+                    .background(MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(20.dp))
+                    .padding(18.dp)
+                ,                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onPrimaryContainer)
             )
+
+            Spacer(Modifier.height(8.dp))
+
             Text(
                 stringResource(R.string.app_name),
-                style = MaterialTheme.typography.headlineMedium,
-                color = MaterialTheme.colorScheme.primary
+                style = MaterialTheme.typography.titleLarge,
             )
 
             Spacer(Modifier.height(8.dp))
@@ -159,7 +164,9 @@ fun LoginScreen(
             Spacer(Modifier.height(16.dp))
 
             TextButton(onClick = onNavigateToRegister) {
-                Text(stringResource(R.string.register_prompt))
+                Text(stringResource(R.string.register_prompt), color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(" ")
+                Text(stringResource(R.string.sign_up_button))
             }
         }
 
