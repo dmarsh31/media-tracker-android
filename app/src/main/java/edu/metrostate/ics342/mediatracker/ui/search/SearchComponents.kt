@@ -44,15 +44,21 @@ fun MediaTypeFilterChips(
     )
 
     Row(
-        modifier = modifier.horizontalScroll(rememberScrollState()),
+        modifier = modifier
+            .horizontalScroll(rememberScrollState()),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         types.forEach { (type, labelRes) ->
             FilterChip(
                 selected = selectedType == type,
                 onClick = { onTypeSelect(type) },
-                label = { Text(stringResource(labelRes)) }
-            )
+                label = { Text(stringResource(labelRes)) },
+                colors = FilterChipDefaults.filterChipColors(
+                    selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                    selectedLabelColor = MaterialTheme.colorScheme.primary,
+                ),
+                shape = RoundedCornerShape(8.dp),
+                )
         }
     }
 }

@@ -29,11 +29,15 @@
     <string name="nav_profile">Profile</string>
 
     <!-- Activity Feed -->
-    <string name="feed_title">Feed</string>
+    <string name="feed_title">Media Tracker</string>
 
     <!-- Search -->
     <string name="search_title">Search</string>
     <string name="searchbar_placeholder">Search books, movies, shows…</string>
+    <string name="search_hint">Search books, movies, shows…</string>
+    <string name="search_results_count">Count</string>
+    <string name="search_popular_this_week">Popular This Week</string>
+
 
 
 
@@ -115,10 +119,7 @@
     <string name="error_generic">error</string>
     <string name="register_title">Create Account</string>
     <string name="error_invalid_credentials">Invalid Credentials</string>
-    <string name="search_hint">Search hint</string>
-    <string name="search_results_count">Count</string>
     <string name="register_success">Registration Success</string>
     <string name="sign_up_button">Sign Up</string>
-    <string name="search_popular_this_week">Popular Searches This Week</string>
 
 </resources>

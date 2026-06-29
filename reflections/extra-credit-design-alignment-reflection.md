@@ -28,19 +28,27 @@
 *Walk through the changes you made. For each area of the design system, describe what the code looked like before and what you changed it to. Reference specific files and Composables.*
 
 ### Color System
-
+I changed all the hex values in colors.kt to the ones specified in the design alignment, I also added 
+Some new colors for the SearchComponets.kt (TV, Book, and Movie) and colors for progress (want to , in progress, finished)
 
 <!-- What did your Color.kt look like before? What did you add or change? How did you wire colors into MaterialTheme? -->
 
 ### Typography
+This one didn't need much work, but I changed a few weights in the type.kt file to align with the design alignment.md
+besides that I changed the styles for many components such as the title of the app on the sign-in page and sign-up page.
+I also changed the type in some of the components in the SearchComponents.kt
 
 <!-- Were weights hardcoded? Did you update Type.kt? What specifically changed? -->
 
 ### Buttons
+Most Buttons where already correct but some like the ones on the sign-in and sign-up page needed their rounded 
+corners increased.
 
 <!-- Which button variants needed work? What was wrong and how did you fix it? -->
 
 ### Text Fields
+The default border color for text fields is already primary so that didn't need to change, but the rounded corners needed
+to change for all my text buttons to match the wireframes
 
 <!-- What shape and color changes did you make? -->
 
@@ -76,5 +84,9 @@
 | **Total** | **50** | |
 
 *One thing I think I did well:*
+I think that parts that I did style I did a good job at matching the colors and making the spacing between components match very closely to the wire frames.
+
 
 *One thing I know I left incomplete or could have done better:*
+for the sign-in and sign-up page, at the bottom where you can switch between the pages, in the wire frame you can only click "Sign Up" or "Log In" I
+didn't figure out how to do that so the whole "Don't have an account? Sign Up" and "Already have an account? Log In" is a clickable button
