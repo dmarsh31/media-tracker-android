@@ -177,7 +177,7 @@ private fun feedCard(event: ActivityEvent){
         modifier = Modifier
             .fillMaxWidth(),
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceContainer
+                containerColor = MaterialTheme.colorScheme.surfaceVariant
             )
     ) {
         Row() {

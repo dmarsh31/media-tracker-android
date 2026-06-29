@@ -1,5 +1,6 @@
 package edu.metrostate.ics342.mediatracker.ui.library
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
@@ -17,14 +18,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
+import edu.metrostate.ics342.mediatracker.R
 import edu.metrostate.ics342.mediatracker.data.model.LibraryItem
 import edu.metrostate.ics342.mediatracker.data.model.LibraryStatus
 import edu.metrostate.ics342.mediatracker.data.model.creatorCredit
+import edu.metrostate.ics342.mediatracker.theme.BookContainer
+import edu.metrostate.ics342.mediatracker.theme.MovieContainer
+import edu.metrostate.ics342.mediatracker.theme.OnBookContainer
+import edu.metrostate.ics342.mediatracker.theme.OnMovieContainer
+import edu.metrostate.ics342.mediatracker.theme.OnTvContainer
+import edu.metrostate.ics342.mediatracker.theme.TvContainer
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -58,7 +67,11 @@ fun LibraryScreen(
                     FilterChip(
                         selected = selectedType == key,
                         onClick  = { selectedType = key },
-                        label    = { Text(stringResource(labelRes)) }
+                        label    = { Text(stringResource(labelRes)) },
+                        colors = FilterChipDefaults.filterChipColors(
+                            selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                            selectedLabelColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                        ),
                     )
                 }
         }
@@ -74,7 +87,12 @@ fun LibraryScreen(
                         index = index, count = LibraryStatus.values().size),
                     selected = selectedStatus == status,
                     onClick  = { viewModel.updateFilter(status) },
-                    label    = { Text(stringResource(status.labelRes)) }
+                    label    = { Text(stringResource(status.labelRes)) },
+                    colors = SegmentedButtonDefaults.colors(
+                        activeContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                        activeContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                    )
+
                 )
             }
         }
@@ -182,14 +200,35 @@ private fun LibraryItemCard(
                         modifier          = Modifier.fillMaxSize()
                     )
                 } else {
-                    Surface(color = MaterialTheme.colorScheme.surfaceVariant,
-                        modifier = Modifier.fillMaxSize()) {
-                        Box(contentAlignment = Alignment.Center) {
-                            Text(when (item.media.mediaType) {
-                                "book" -> "📖"; "movie" -> "🎬"; "show" -> "📺"
-                                else -> "?"
-                            }, style = MaterialTheme.typography.titleLarge)
-                        }
+                    val containerColor = when (item.media.mediaType) {
+                        "book"  -> BookContainer
+                        "movie" -> MovieContainer
+                        else    -> TvContainer
+                    }
+                    val iconTint = when (item.media.mediaType) {
+                        "book"  -> OnBookContainer
+                        "movie" -> OnMovieContainer
+                        else    -> OnTvContainer
+                    }
+
+                    Box(
+                        modifier = Modifier
+                            .width(68.dp)
+                            .height(100.dp)
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(containerColor),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            painter = painterResource(when (item.media.mediaType) {
+                                "book"  -> edu.metrostate.ics342.mediatracker.R.drawable.book_icon
+                                "movie" -> edu.metrostate.ics342.mediatracker.R.drawable.movie_icon
+                                else    -> R.drawable.tv_icon
+                            }),
+                            contentDescription = null,
+                            modifier = Modifier.size(32.dp),
+                            tint = iconTint
+                        )
                     }
                 }
             }
@@ -207,7 +246,13 @@ private fun LibraryItemCard(
                 SuggestionChip(
                     onClick = { statusDialogVisible = true },
                     label   = { Text(stringResource(item.status.labelRes),
-                        style = MaterialTheme.typography.labelSmall) }
+                        style = MaterialTheme.typography.labelSmall)
+                    },
+                    colors = SuggestionChipDefaults.suggestionChipColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        labelColor = MaterialTheme.colorScheme.onPrimaryContainer
+                    ),
+                    shape = RoundedCornerShape(28.dp)
                 )
             }
 

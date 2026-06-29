@@ -55,7 +55,7 @@ fun MediaTypeFilterChips(
                 label = { Text(stringResource(labelRes)) },
                 colors = FilterChipDefaults.filterChipColors(
                     selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                    selectedLabelColor = MaterialTheme.colorScheme.primary,
+                    selectedLabelColor = MaterialTheme.colorScheme.onPrimaryContainer,
                 ),
                 shape = RoundedCornerShape(8.dp),
                 )

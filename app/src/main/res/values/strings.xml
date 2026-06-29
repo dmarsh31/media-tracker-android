@@ -71,7 +71,7 @@
     <string name="action_following">Following</string>
 
     <!-- Connections -->
-    <string name="connections_title">Connections</string>
+    <string name="connections_title">People</string>
     <string name="connections_followers_empty">No one follows you yet.</string>
     <string name="connections_following_empty">You\'re not following anyone yet.</string>
 
