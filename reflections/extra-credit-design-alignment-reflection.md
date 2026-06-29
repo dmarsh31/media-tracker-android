@@ -89,4 +89,5 @@ I think that parts that I did style I did a good job at matching the colors and 
 
 *One thing I know I left incomplete or could have done better:*
 for the sign-in and sign-up page, at the bottom where you can switch between the pages, in the wire frame you can only click "Sign Up" or "Log In" I
-didn't figure out how to do that so the whole "Don't have an account? Sign Up" and "Already have an account? Log In" is a clickable button
+didn't figure out how to do that so the whole "Don't have an account? Sign Up" and "Already have an account? Log In" is a clickable button, and the
+top app bar seems too low, but I didn't think it was off enough to change 

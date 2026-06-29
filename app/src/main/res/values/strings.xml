@@ -31,6 +31,8 @@
     <!-- Activity Feed -->
     <string name="feed_title">Media Tracker</string>
 
+
+
     <!-- Search -->
     <string name="search_title">Search</string>
     <string name="searchbar_placeholder">Search books, movies, shows…</string>
@@ -110,6 +112,8 @@
     <string name="media_unknown_author">Unknown Author</string>
     <string name="media_unknown_director">Unknown Director</string>
     <string name="media_unknown_creator">Unknown Creator</string>
+    <string name="media_unknown_title">Unknown Title</string>
+
 
 
     <string name="error_empty_fields">You have empty feilds</string>
