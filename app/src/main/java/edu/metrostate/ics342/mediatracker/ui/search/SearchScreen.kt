@@ -2,6 +2,7 @@ package edu.metrostate.ics342.mediatracker.ui.search
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
@@ -34,7 +35,7 @@ fun SearchScreen(
     }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        TopAppBar(title = { Text(stringResource(R.string.app_name)) })
+        TopAppBar(title = { Text(stringResource(R.string.search_title)) })
 
         OutlinedTextField(
             value = query,
@@ -52,8 +53,9 @@ fun SearchScreen(
                     viewModel.clearQuery()
                     onSearch(q)
                 }
-            })
-        )
+            }),
+            shape = RoundedCornerShape(28.dp),
+            )
 
         MediaTypeFilterChips(
             selectedType = selectedType,

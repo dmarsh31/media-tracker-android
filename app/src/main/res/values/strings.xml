@@ -5,9 +5,8 @@
     <!-- Auth -->
     <string name="email_label">Email</string>
     <string name="password_label">Password</string>
-    <string name="sign_in_button">Sign In</string>
+    <string name="sign_in_button">log In</string>
     <string name="register_prompt">Don\'t have an account?</string>
-    <string name="register_prompt_clickable">Sign Up</string>
 
 
     <!-- Auth RegScreen -->
@@ -18,8 +17,7 @@
     <string name="register_email">Email</string>
     <string name="register_password">Password</string>
     <string name="register_confirm_password">Confirm Password</string>
-    <string name="login_prompt">Already have an account?</string>
-    <string name="login_prompt_clickable">Log In</string>
+    <string name="sign_in_prompt">Already have an account?</string>
 
 
 
@@ -31,11 +29,17 @@
     <string name="nav_profile">Profile</string>
 
     <!-- Activity Feed -->
-    <string name="feed_title">Feed</string>
+    <string name="feed_title">Media Tracker</string>
+
+
 
     <!-- Search -->
     <string name="search_title">Search</string>
     <string name="searchbar_placeholder">Search books, movies, shows…</string>
+    <string name="search_hint">Search books, movies, shows…</string>
+    <string name="search_results_count">Count</string>
+    <string name="search_popular_this_week">Popular This Week</string>
+
 
 
 
@@ -67,7 +71,7 @@
     <string name="action_following">Following</string>
 
     <!-- Connections -->
-    <string name="connections_title">Connections</string>
+    <string name="connections_title">People</string>
     <string name="connections_followers_empty">No one follows you yet.</string>
     <string name="connections_following_empty">You\'re not following anyone yet.</string>
 
@@ -108,6 +112,10 @@
     <string name="media_unknown_author">Unknown Author</string>
     <string name="media_unknown_director">Unknown Director</string>
     <string name="media_unknown_creator">Unknown Creator</string>
+    <string name="media_unknown_title">Unknown Title</string>
+
+
+
     <string name="error_empty_fields">You have empty feilds</string>
     <string name="error_passwords_mismatch">Passswords dont match</string>
     <string name="error_email_or_username_taken">email or username already taken</string>
@@ -115,10 +123,7 @@
     <string name="error_generic">error</string>
     <string name="register_title">Create Account</string>
     <string name="error_invalid_credentials">Invalid Credentials</string>
-    <string name="search_hint">Search hint</string>
-    <string name="search_results_count">Count</string>
     <string name="register_success">Registration Success</string>
     <string name="sign_up_button">Sign Up</string>
-    <string name="search_popular_this_week">Popular Searches This Week</string>
 
 </resources>

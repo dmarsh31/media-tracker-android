@@ -1,5 +1,6 @@
 package edu.metrostate.ics342.mediatracker.ui.connections
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -120,13 +121,21 @@ private fun UserRow(
                 onClick  = { following = false },
                 modifier = Modifier.height(32.dp),
                 contentPadding = PaddingValues(horizontal = 16.dp, vertical = 0.dp)
-            ) { Text(stringResource(edu.metrostate.ics342.mediatracker.R.string.action_following), style = MaterialTheme.typography.labelMedium) }
+            ) { Text(stringResource(edu.metrostate.ics342.mediatracker.R.string.action_following),
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.primary) }
         } else {
             Button(
                 onClick  = { following = true },
                 modifier = Modifier.height(32.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                ),
                 contentPadding = PaddingValues(horizontal = 16.dp, vertical = 0.dp)
-            ) { Text(stringResource(edu.metrostate.ics342.mediatracker.R.string.action_follow), style = MaterialTheme.typography.labelMedium) }
+            ) { Text(stringResource(edu.metrostate.ics342.mediatracker.R.string.action_follow),
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.primary,
+            ) }
         }
     }
 }

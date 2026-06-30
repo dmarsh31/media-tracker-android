@@ -6,16 +6,16 @@ import androidx.compose.ui.graphics.Color
 val Primary            = Color(0xFF6366F1)
 val OnPrimary          = Color(0xFFFFFFFF)
 val PrimaryContainer   = Color(0xFFE0E0FF)
-val OnPrimaryContainer = Color(0xFF1E1B4B)
+val OnPrimaryContainer = Color(0xFF3730A3)
 
-// Secondary — warm amber
-val Secondary            = Color(0xFFD97706)
+// Secondary
+val Secondary            = Color(0xFFDB2777)
 val OnSecondary          = Color(0xFFFFFFFF)
-val SecondaryContainer   = Color(0xFFFEF3C7)
+val SecondaryContainer   = Color(0xFFFCE7F3)
 val OnSecondaryContainer = Color(0xFF78350F)
 
-// Tertiary — teal
-val Tertiary            = Color(0xFF0D9488)
+// Tertiary
+val Tertiary            = Color(0xFFD97706)
 val OnTertiary          = Color(0xFFFFFFFF)
 val TertiaryContainer   = Color(0xFFCCFBF1)
 val OnTertiaryContainer = Color(0xFF134E4A)
@@ -29,9 +29,18 @@ val SurfaceVariant  = Color(0xFFE8E8F0)
 val OnSurfaceVariant= Color(0xFF44475A)
 val Outline         = Color(0xFF9CA3AF)
 
-// Movie type accent — rose/pink (no pink in the M3 palette above, so defined separately)
+//Moved all to separate val, so other changes won't affect these
+// Movie accent
 val MovieContainer   = Color(0xFFFFE4EE)
 val OnMovieContainer = Color(0xFF9D174D)
+
+// Book accent
+val BookContainer   = Color(0xFFE0E0FF)
+val OnBookContainer = Color(0xFF3730A3)
+
+// Tv accent
+val TvContainer   = Color(0xFFFEF3C7)
+val OnTvContainer = Color(0xFFD97706)
 
 // Dark theme
 val DarkBackground       = Color(0xFF0F0F1A)
@@ -41,3 +50,11 @@ val DarkPrimary          = Color(0xFF818CF8)
 val DarkOnPrimary        = Color(0xFF1E1B4B)
 val DarkPrimaryContainer = Color(0xFF2D2B6E)
 val DarkOnPrimaryContainer = Color(0xFFE0E7FF)
+
+//Progress Colors
+val WantTo              = Color(0xFF7C3AED)
+val WantToContainer     = Color(0xFFEDE9FE)
+val InProgress          = Color(0xFF2563EB)
+val InProgressContainer = Color(0xFFDBEAFE)
+val Finished            = Color(0xFF059669)
+val FinishedContainer   = Color(0xFFD1FAE5)
