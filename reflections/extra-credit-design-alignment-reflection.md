@@ -48,23 +48,31 @@ corners increased.
 
 ### Text Fields
 The default border color for text fields is already primary so that didn't need to change, but the rounded corners needed
-to change for all my text buttons to match the wireframes
+to change for all my text buttons to match the wireframes. The text field on the search page was also rounded extra 28.dP
+as to spec on the design alignment
 
 <!-- What shape and color changes did you make? -->
 
 ### Other Components
+Nav bar now has the correct color for the active chip (Primary and Primary container), I also did this with other components like the
+chips on the people and library page now are (Primary and Primary container) and not the amber color they were.
 
 <!-- Chips, cards, bottom nav, status badges — what changed? -->
 
 ---
 
 ## What Was Hard
+getting the components to look right, the spacing and especially the colors where difficult for example on my
+feed page the card container color still seems off. 
 
 *Describe the most technically challenging part of this work. Don't write "it was confusing." Explain specifically what confused you, what you tried, and what helped you figure it out. If something in the Jetpack Compose theming system surprised you, describe it.*
 
 ---
 
 ## What You Understand Now
+I understand how color scheme and typography work, how they can save colors or a style to be used across the 
+app. and from what I can tell these styles and colors are saved into MaterialTheme so you can swap out themes
+for example light and dark mode
 
 *What do you understand about Jetpack Compose theming — `MaterialTheme`, `colorScheme`, `typography`, component defaults — that you didn't fully grasp before this assignment? Be specific enough that you could explain it to a pod mate who hasn't done this yet.*
 
@@ -75,13 +83,13 @@ to change for all my text buttons to match the wireframes
 *Look at the rubric (`extra-credit-design-alignment-rubric.md`) and estimate your own score for each section. Be honest — this does not affect your grade, but it shows me whether you read the rubric carefully.*
 
 | Section | Possible | My Estimate |
-|:---|:---:|:---:|
-| Color System | 13 | |
-| Typography | 5 | |
-| Component Styling | 15 | |
-| Navigation & Cards | 5 | |
-| Reflection | 12 | |
-| **Total** | **50** | |
+|:---|:---:|:-----------:|
+| Color System | 13 |     10      |
+| Typography | 5 |      4      |
+| Component Styling | 15 |     12      |
+| Navigation & Cards | 5 |      5      |
+| Reflection | 12 |     10      |
+| **Total** | **50** |     41      |
 
 *One thing I think I did well:*
 I think that parts that I did style I did a good job at matching the colors and making the spacing between components match very closely to the wire frames.
